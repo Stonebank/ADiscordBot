@@ -1,4 +1,4 @@
-import discord.Discord;
+import src.Discord;
 
 import javax.security.auth.login.LoginException;
 

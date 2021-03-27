@@ -11,7 +11,9 @@ class OnMessageReceived : ListenerAdapter() {
         if (event.isFromType(ChannelType.PRIVATE))
             return
 
-        if (event.message.contentRaw.equals("ping", ignoreCase = true))
+        println(event.message.contentRaw)
+
+        if (event.message.contentRaw.equals(other = "ping", ignoreCase = true))
             event.channel.sendMessage("pong!").queue()
 
     }

@@ -1,6 +1,7 @@
-package discord;
+package src;
 
 import event.message.OnMessageReceived;
+import event.ready.ReadyListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
@@ -14,11 +15,10 @@ public class Discord {
 
     public Discord(String token) throws LoginException, InterruptedException {
 
-        jda = JDABuilder.createDefault(token).addEventListeners(new OnMessageReceived()).build();
+        jda = JDABuilder.createDefault(token).addEventListeners(new OnMessageReceived(), new ReadyListener()).build();
         jda.setAutoReconnect(true);
         jda.awaitReady();
 
-        System.out.println("Discord bot is ready!");
 
     }
 
