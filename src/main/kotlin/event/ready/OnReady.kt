@@ -12,9 +12,10 @@ class ReadyListener : EventListener {
 
         if (event is ReadyEvent) {
 
-            println("${event.jda.selfUser.name} is ready for usage! Preparing to load events...")
+            // Loading the commands
+            CommandHandler.init()
 
-            CommandHandler.Init
+            println("${event.jda.selfUser.name} is ready for usage!")
 
         }
 
