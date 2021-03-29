@@ -18,10 +18,13 @@ dependencies {
 
     ext.kotlin_version = '1.4.0-rc'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
     compile 'net.dv8tion:JDA:4.1.1_157'
 
     compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
     compile "org.slf4j:slf4j-simple:1.6.1"
+
+    compile group: 'com.google.guava', name: 'guava', version: '29.0-jre'
 
 }
 

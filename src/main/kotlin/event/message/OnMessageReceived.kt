@@ -1,7 +1,6 @@
 package event.message
 
 import commands.CommandHandler
-import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.entities.ChannelType
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.ListenerAdapter
@@ -20,9 +19,7 @@ class OnMessageReceived : ListenerAdapter() {
 
         val cmd = event.message.contentRaw.split(" ").toTypedArray()
 
-        val embed = EmbedBuilder()
-        val stringBuilder = StringBuilder()
-        CommandHandler.handleCommand(cmd, embed, stringBuilder, event)
+        CommandHandler.handleCommand(cmd, event)
 
     }
 

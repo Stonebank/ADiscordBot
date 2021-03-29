@@ -1,7 +1,6 @@
 package commands;
 
-import commands.container.GenerateRandomNumber;
-import net.dv8tion.jda.api.EmbedBuilder;
+import commands.container.ListAllCommands;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import utils.Utility;
 
@@ -18,7 +17,7 @@ public abstract class CommandHandler {
 
         try {
 
-            for (Class<?> c : Utility.getClasses(GenerateRandomNumber.class.getPackageName())) {
+            for (Class<?> c : Utility.getClasses(ListAllCommands.class.getPackageName())) {
 
                 Object instance = c.getDeclaredConstructor().newInstance();
                 boolean isCommandClass = instance instanceof CommandHandler;
@@ -46,7 +45,7 @@ public abstract class CommandHandler {
 
     }
 
-    public static void handleCommand(String[] cmd, EmbedBuilder embedBuilder, StringBuilder text, MessageReceivedEvent event) {
+    public static void handleCommand(String[] cmd, MessageReceivedEvent event) {
 
         commands.forEach((annotation, command) -> {
 
@@ -60,8 +59,10 @@ public abstract class CommandHandler {
 
             for (String s : commands) {
 
-                if (cmd[0].equalsIgnoreCase("!" + s))
-                    command.execute(embedBuilder, text, event, cmd);
+                if (cmd[0].equalsIgnoreCase("!" + s)) {
+                    command.execute(event, cmd);
+                    return;
+                }
 
             }
 
@@ -69,6 +70,10 @@ public abstract class CommandHandler {
 
     }
 
-    public abstract void execute(EmbedBuilder embedBuilder, StringBuilder text, MessageReceivedEvent event, String... cmd);
+    public abstract void execute(MessageReceivedEvent event, String... cmd);
+
+    public static HashMap<CommandAnnotation, CommandHandler> getCommands() {
+        return commands;
+    }
 
 }
