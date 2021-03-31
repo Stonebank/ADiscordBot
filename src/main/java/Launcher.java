@@ -4,7 +4,7 @@ public class Launcher {
 
     public static void main(String... args) throws LoginException, InterruptedException {
 
-        if (args.length < 1) {
+        if (args.length != 1) {
             System.err.println("Discord token is missing from argument.");
             return;
         }

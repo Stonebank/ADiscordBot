@@ -70,10 +70,10 @@ public abstract class CommandHandler {
 
     }
 
-    public abstract void execute(MessageReceivedEvent event, String... cmd);
-
     public static HashMap<CommandInfo, CommandHandler> getCommands() {
         return commands;
     }
+
+    public abstract void execute(MessageReceivedEvent event, String... cmd);
 
 }
