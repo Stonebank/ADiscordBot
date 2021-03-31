@@ -16,12 +16,17 @@ public class Discord {
     public Discord(String token) throws LoginException, InterruptedException {
         Stopwatch stopwatch = Stopwatch.createStarted();
 
-        jda = JDABuilder.createDefault(token).addEventListeners(new OnMessageReceived(), new ReadyListener()).build();
+        Object[] listeners = new Object[] {
+                new OnMessageReceived(),
+                new ReadyListener()
+        };
+
+        jda = JDABuilder.createDefault(token).addEventListeners(listeners).build();
         jda.setAutoReconnect(true);
         jda.awaitReady();
 
-        System.out.printf("Executed in %s mills!", stopwatch.stop().elapsed(TimeUnit.MILLISECONDS));
-        
+        System.out.printf("Executed in %s mills!\n", stopwatch.stop().elapsed(TimeUnit.MILLISECONDS));
+
     }
 
     public JDA getJda() {

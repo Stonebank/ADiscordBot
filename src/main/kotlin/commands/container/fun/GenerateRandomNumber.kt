@@ -1,7 +1,7 @@
 package commands.container.`fun`
 
-import commands.CommandInfo
 import commands.CommandHandler
+import commands.CommandInfo
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 
 @CommandInfo(cmd = "rng,randomnumber,roll", description = "Generates a random number between 1-100")
