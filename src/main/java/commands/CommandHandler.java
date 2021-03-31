@@ -11,7 +11,7 @@ import java.util.HashMap;
 
 public abstract class CommandHandler {
 
-    private static final HashMap<CommandAnnotation, CommandHandler> commands = new HashMap<>();
+    private static final HashMap<CommandInfo, CommandHandler> commands = new HashMap<>();
 
     public static void init() {
 
@@ -25,12 +25,12 @@ public abstract class CommandHandler {
                 if (c.isAnonymousClass() || !isCommandClass || commands.containsValue(instance))
                     continue;
 
-                if (Arrays.stream(c.getAnnotations()).noneMatch(annotation -> annotation instanceof CommandAnnotation)) {
+                if (Arrays.stream(c.getAnnotations()).noneMatch(annotation -> annotation instanceof CommandInfo)) {
                     System.err.println(c.getName() + " has no annotation");
                     continue;
                 }
 
-                CommandAnnotation annotation = c.getAnnotation(CommandAnnotation.class);
+                CommandInfo annotation = c.getAnnotation(CommandInfo.class);
 
                 CommandHandler command = (CommandHandler) instance;
                 commands.put(annotation, command);
@@ -72,7 +72,7 @@ public abstract class CommandHandler {
 
     public abstract void execute(MessageReceivedEvent event, String... cmd);
 
-    public static HashMap<CommandAnnotation, CommandHandler> getCommands() {
+    public static HashMap<CommandInfo, CommandHandler> getCommands() {
         return commands;
     }
 

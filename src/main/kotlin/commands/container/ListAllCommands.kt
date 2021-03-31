@@ -1,12 +1,12 @@
 package commands.container
 
-import commands.CommandAnnotation
 import commands.CommandHandler
+import commands.CommandInfo
 import net.dv8tion.jda.api.EmbedBuilder
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import java.awt.Color
 
-@CommandAnnotation(cmd = "help,commands", description = "Generates a list of all commands")
+@CommandInfo(cmd = "help,commands", description = "Generates a list of all commands")
 class ListAllCommands : CommandHandler() {
 
     override fun execute(event: MessageReceivedEvent, vararg cmd: String?) {
@@ -14,14 +14,14 @@ class ListAllCommands : CommandHandler() {
 
         val embed = EmbedBuilder().setColor(Color.RED).setTitle("${event.jda.selfUser.name} commands")
 
-        getCommands().forEach { (annotation: CommandAnnotation, _: CommandHandler) ->
+        getCommands().forEach { (info: CommandInfo, _: CommandHandler) ->
 
-            for (commands in annotation.cmd.split(",").toTypedArray())
+            for (commands in info.cmd.split(",").toTypedArray())
                 text.append("${commands.capitalize()} ")
 
-            text.append("\n${annotation.description}\n")
+            text.append("\n${info.description}\n")
 
-            text.append("Globally disabled: ${if (annotation.disabled) "Yes" else "No"}\n\n")
+            text.append("Globally disabled: ${if (info.disabled) "Yes" else "No"}\n\n")
 
         }
 
