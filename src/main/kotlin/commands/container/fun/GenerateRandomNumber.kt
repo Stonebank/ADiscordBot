@@ -28,7 +28,7 @@ class GenerateRandomNumber : CommandHandler() {
             return
         }
 
-        event.channel.sendMessage("You rolled ${(min..max).random()}!").queue()
+        event.channel.sendMessage("You rolled ${(min..max).random()} between $min and $max!").queue()
     }
 
 }
