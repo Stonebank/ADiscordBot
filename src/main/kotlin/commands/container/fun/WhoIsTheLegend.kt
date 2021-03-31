@@ -11,9 +11,8 @@ class WhoIsTheLegend : CommandHandler() {
 
         var legend = event.guild.members[(0 until event.guild.members.size).random()]
 
-        while (legend.user.isBot) {
+        while (legend.user.isBot)
             legend = event.guild.members[(0 until event.guild.members.size).random()]
-        }
 
         event.channel.sendMessage("${legend.asMention} is the legend in ${event.guild.name}!").queue()
     }
