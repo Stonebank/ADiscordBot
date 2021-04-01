@@ -9,12 +9,16 @@ class WhoIsTheLegend : CommandHandler() {
 
     override fun execute(event: MessageReceivedEvent, vararg cmd: String?) {
 
-        var legend = event.guild.members[(0 until event.guild.members.size).random()]
+        for (member in event.guild.members) {
 
-        while (legend.user.isBot)
-            legend = event.guild.members[(0 until event.guild.members.size).random()]
+            if (member.user.isBot)
+                continue
 
-        event.channel.sendMessage("${legend.asMention} is the legend in ${event.guild.name}!").queue()
+            event.channel.sendMessage("${member.asMention} is the legend in ${event.guild.name}!").queue()
+            return
+
+        }
+
     }
 
 }
