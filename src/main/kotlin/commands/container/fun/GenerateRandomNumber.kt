@@ -9,6 +9,11 @@ class GenerateRandomNumber : CommandHandler() {
 
     override fun execute(event: MessageReceivedEvent, vararg cmd: String) {
 
+        if (cmd.size < 3) {
+            event.channel.sendMessage("This is now how to use the command! Example: !rng 20 40").queue()
+            return
+        }
+
         if (cmd[1].toIntOrNull() == null) {
             event.channel.sendMessage("Your first argument must be an integer.").queue()
             return
@@ -23,7 +28,7 @@ class GenerateRandomNumber : CommandHandler() {
 
         val max = cmd[2].toInt()
 
-        if (min > max) {
+        if (min >= max) {
             event.channel.sendMessage("The maximum input ($max) has to be higher than the lower input ($min).").queue()
             return
         }
